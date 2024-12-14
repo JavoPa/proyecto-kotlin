@@ -9,5 +9,5 @@
 
     <string name="menu_home">Inicio</string>
     <string name="menu_ficha">Ficha Médica</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_vacunas">Vacunas</string>
 </resources>

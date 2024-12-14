@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_ficha" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.proyecto_kotlin.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_vacunas"
+        android:name="com.example.proyecto_kotlin.ui.vacunas.VacunasFragment"
+        android:label="@string/menu_vacunas"
+        tools:layout="@layout/fragment_vacunas" />
 </navigation>
