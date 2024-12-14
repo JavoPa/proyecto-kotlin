@@ -22,4 +22,10 @@
         android:name="com.example.proyecto_kotlin.ui.vacunas.VacunasFragment"
         android:label="@string/menu_vacunas"
         tools:layout="@layout/fragment_vacunas" />
+
+    <fragment
+        android:id="@+id/nav_salud"
+        android:name="com.example.proyecto_kotlin.ui.salud.SaludFragment"
+        android:label="@string/menu_salud"
+        tools:layout="@layout/fragment_salud" />
 </navigation>

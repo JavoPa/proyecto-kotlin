@@ -16,5 +16,9 @@
             android:id="@+id/nav_vacunas"
             android:icon="@drawable/ic_menu_vacunas"
             android:title="@string/menu_vacunas" />
+        <item
+            android:id="@+id/nav_salud"
+            android:icon="@drawable/ic_menu_salud"
+            android:title="@string/menu_salud" />
     </group>
 </menu>
