@@ -13,20 +13,6 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/etEspecieMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Especie"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/etRazaMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Raza"
-        android:inputType="text" />
-
-    <EditText
         android:id="@+id/etFechaNacimientoMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +25,22 @@
         android:layout_height="wrap_content"
         android:hint="Peso"
         android:inputType="date" />
+
+    <Spinner
+        android:id="@+id/spinnerEspecieMascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:spinnerMode="dropdown" />
+
+    <Spinner
+        android:id="@+id/spinnerRazaMascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/btnAgregarMascota"
