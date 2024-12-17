@@ -50,34 +50,40 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
                 razaSpinner.adapter = razaAdapter
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         agregarButton.setOnClickListener {
-            val nombre = nombreEditText.text.toString()
-            val especie = especieSpinner.selectedItem.toString()
-            val raza = razaSpinner.selectedItem.toString()
-            val fechaNacimiento = fechaEditText.text.toString()
-            val pesoString = pesoEditText.text.toString()
-            val peso = pesoString.toDouble()
+            val nombre = nombreEditText.text.toString().trim()
+            val especie = especieSpinner.selectedItem.toString().trim()
+            val raza = razaSpinner.selectedItem.toString().trim()
+            val fechaNacimiento = fechaEditText.text.toString().trim()
+            val pesoString = pesoEditText.text.toString().trim()
 
-
-            if (nombre.isNotEmpty() && especie.isNotEmpty() && raza.isNotEmpty() && fechaNacimiento.isNotEmpty()) {
-                val nuevaMascota = Mascota(
-                    id = System.currentTimeMillis().toInt(),
-                    nombre = nombre,
-                    especie = especie,
-                    raza = raza,
-                    fechaNacimiento = fechaNacimiento,
-                    peso = peso,
-                    fotoUrl = null
-                )
-                onMascotaAgregada(nuevaMascota)
-                dismiss()
-            }else {
+            if (nombre.isEmpty() || especie.isEmpty() || raza.isEmpty() || fechaNacimiento.isEmpty() || pesoString.isEmpty()) {
                 Toast.makeText(context, "Por favor, completa todos los campos correctamente.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            val peso = try {
+                pesoString.toDouble()
+            } catch (e: NumberFormatException) {
+                Toast.makeText(context, "El peso debe ser un número válido.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val nuevaMascota = Mascota(
+                id = System.currentTimeMillis().toInt(),
+                nombre = nombre,
+                especie = especie,
+                raza = raza,
+                fechaNacimiento = fechaNacimiento,
+                peso = peso,
+                fotoUrl = null
+            )
+
+            onMascotaAgregada(nuevaMascota)
+            dismiss()
         }
 
         return dialog
