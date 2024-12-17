@@ -27,7 +27,6 @@ data class Mascota(
 
             var edadCalculada = edadActual.get(Calendar.YEAR) - edad.get(Calendar.YEAR)
 
-            // Comprobamos si ya pasó el cumpleaños este año o no
             if (edadActual.get(Calendar.MONTH) < edad.get(Calendar.MONTH) ||
                 (edadActual.get(Calendar.MONTH) == edad.get(Calendar.MONTH) && edadActual.get(
                     Calendar.DAY_OF_MONTH

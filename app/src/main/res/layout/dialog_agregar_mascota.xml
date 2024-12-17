@@ -1,50 +1,85 @@
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_margin="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    android:background="@color/white">
 
-    <EditText
-        android:id="@+id/etNombreMascota"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la mascota"
-        android:inputType="text" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etFechaNacimientoMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Fecha de nacimiento"
-        android:inputType="date" />
+        <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Nueva Mascota"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
 
-    <EditText
-        android:id="@+id/etPesoMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Peso"
-        android:inputType="date" />
+        <EditText
+            android:id="@+id/etNombreMascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de la mascota"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="text" />
 
-    <Spinner
-        android:id="@+id/spinnerEspecieMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:spinnerMode="dropdown" />
+        <EditText
+            android:id="@+id/etFechaNacimientoMascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha de nacimiento"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="date" />
 
-    <Spinner
-        android:id="@+id/spinnerRazaMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:spinnerMode="dropdown" />
+        <EditText
+            android:id="@+id/etPesoMascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso (kg)"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/btnAgregarMascota"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Agregar" />
-</LinearLayout>
+        <Spinner
+            android:id="@+id/spinnerEspecieMascota"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/spinner_background"
+            android:minHeight="48dp"
+            android:paddingHorizontal="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerRazaMascota"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/spinner_background"
+            android:minHeight="48dp"
+            android:paddingHorizontal="8dp" />
+
+        <Button
+            android:id="@+id/btnAgregarMascota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar"
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:padding="12dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
