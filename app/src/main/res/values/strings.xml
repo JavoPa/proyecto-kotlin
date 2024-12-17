@@ -11,4 +11,8 @@
     <string name="menu_ficha">Ficha Médica</string>
     <string name="menu_vacunas">Vacunas</string>
     <string name="menu_salud">Salud</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

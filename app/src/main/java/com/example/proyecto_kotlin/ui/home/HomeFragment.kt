@@ -1,42 +1,51 @@
 package com.example.proyecto_kotlin.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.proyecto_kotlin.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto_kotlin.DetalleMascotaActivity
+import com.example.proyecto_kotlin.R
 
 class HomeFragment : Fragment() {
-
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var adapter: MascotaAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        adapter = MascotaAdapter(emptyList()) { mascota ->
+            val intent = Intent(requireContext(), DetalleMascotaActivity::class.java)
+            intent.putExtra("MASCOTA_ID", mascota.id)
+            startActivity(intent)
         }
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewMascotas)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        val btnAgregarMascota = view.findViewById<Button>(R.id.btnAgregarMascota)
+        btnAgregarMascota.setOnClickListener {
+            val dialog = AgregarMascotaDialog { nuevaMascota ->
+                homeViewModel.agregarMascota(nuevaMascota)
+            }
+            dialog.show(parentFragmentManager, "AgregarMascotaDialog")
+        }
+
+        homeViewModel.mascotas.observe(viewLifecycleOwner) { mascotas ->
+            adapter.updateData(mascotas)
+        }
+
+        return view
     }
 }
