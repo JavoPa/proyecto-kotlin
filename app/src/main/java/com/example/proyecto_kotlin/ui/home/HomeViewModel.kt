@@ -25,17 +25,21 @@ class HomeViewModel : ViewModel() {
                 especie = "Perro",
                 raza = "Golden Retriever",
                 fechaNacimiento = "01/01/2020",
-                peso = 10.4,
-                fotoUrl = null
+                peso = 30.5,
+                fotoUrl = null,
+                alergias = listOf("Polen", "Ciertos alimentos con gluten"),
+                antecedentes = listOf("Dermatitis alérgica tratada en 2022")
             ),
             Mascota(
                 id = 2,
                 nombre = "Luna",
                 especie = "Gato",
-                raza = "Siames",
+                raza = "Siamés",
                 fechaNacimiento = "15/06/2019",
-                peso = 10.4,
-                fotoUrl = null
+                peso = 4.8,
+                fotoUrl = null,
+                alergias = emptyList(),
+                antecedentes = listOf("Cirugía de esterilización en 2020")
             ),
             Mascota(
                 id = 3,
@@ -43,8 +47,10 @@ class HomeViewModel : ViewModel() {
                 especie = "Perro",
                 raza = "Bulldog Francés",
                 fechaNacimiento = "10/11/2021",
-                peso = 10.4,
-                fotoUrl = null
+                peso = 11.2,
+                fotoUrl = null,
+                alergias = listOf("Pollo", "Maíz"),
+                antecedentes = emptyList()
             ),
             Mascota(
                 id = 4,
@@ -52,8 +58,10 @@ class HomeViewModel : ViewModel() {
                 especie = "Ave",
                 raza = "Cacatúa",
                 fechaNacimiento = "23/03/2022",
-                peso = 10.4,
-                fotoUrl = null
+                peso = 0.3,
+                fotoUrl = null,
+                alergias = emptyList(),
+                antecedentes = listOf("Fractura de ala derecha en 2023")
             )
         )
         _mascotas.value = mascotas.toMutableList()
