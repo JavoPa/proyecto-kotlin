@@ -13,9 +13,6 @@
         android:theme="@style/Theme.Proyectokotlin"
         tools:targetApi="31">
         <activity
-            android:name=".DetalleMascotaActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
