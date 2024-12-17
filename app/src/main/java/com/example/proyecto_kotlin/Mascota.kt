@@ -9,7 +9,9 @@ data class Mascota(
     val nombre: String,
     val especie: String,
     val raza: String,
-    val peso: Double,
+    val peso: Double?,
+    val alergias: List<String>,
+    val antecedentes: List<String>,
     val fechaNacimiento: String,
     val fotoUrl: String?
 ) {

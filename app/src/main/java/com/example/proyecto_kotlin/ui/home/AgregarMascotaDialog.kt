@@ -31,7 +31,6 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
         val nombreEditText = view.findViewById<EditText>(R.id.etNombreMascota)
         val fechaEditText = view.findViewById<EditText>(R.id.etFechaNacimientoMascota)
         val agregarButton = view.findViewById<Button>(R.id.btnAgregarMascota)
-        val pesoEditText = view.findViewById<EditText>(R.id.etPesoMascota)
         val especieSpinner = view.findViewById<Spinner>(R.id.spinnerEspecieMascota)
         val razaSpinner = view.findViewById<Spinner>(R.id.spinnerRazaMascota)
 
@@ -58,17 +57,9 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
             val especie = especieSpinner.selectedItem.toString().trim()
             val raza = razaSpinner.selectedItem.toString().trim()
             val fechaNacimiento = fechaEditText.text.toString().trim()
-            val pesoString = pesoEditText.text.toString().trim()
 
-            if (nombre.isEmpty() || especie.isEmpty() || raza.isEmpty() || fechaNacimiento.isEmpty() || pesoString.isEmpty()) {
+            if (nombre.isEmpty() || especie.isEmpty() || raza.isEmpty() || fechaNacimiento.isEmpty()) {
                 Toast.makeText(context, "Por favor, completa todos los campos correctamente.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val peso = try {
-                pesoString.toDouble()
-            } catch (e: NumberFormatException) {
-                Toast.makeText(context, "El peso debe ser un número válido.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -78,7 +69,9 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
                 especie = especie,
                 raza = raza,
                 fechaNacimiento = fechaNacimiento,
-                peso = peso,
+                peso = null,
+                alergias = emptyList(),
+                antecedentes = emptyList(),
                 fotoUrl = null
             )
 
