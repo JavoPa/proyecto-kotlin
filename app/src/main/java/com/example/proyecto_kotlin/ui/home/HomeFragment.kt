@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
         // Configurar el adaptador del RecyclerView
         adapter = MascotaAdapter(emptyList()) { mascota ->
             // Utilizar NavController para navegar a FichaFragment con el argumento mascotaId
+            guardarMascotaSeleccionada(mascota.id)
             val action = HomeFragmentDirections.actionNavHomeToNavFicha(mascota.id)
             findNavController().navigate(action)
         }
@@ -50,5 +52,10 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun guardarMascotaSeleccionada(mascotaId: Int) {
+        val sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putInt("MASCOTA_ID", mascotaId).apply()
     }
 }
