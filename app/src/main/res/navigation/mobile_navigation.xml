@@ -39,7 +39,12 @@
         android:id="@+id/nav_vacunas"
         android:name="com.example.proyecto_kotlin.ui.vacunas.VacunasFragment"
         android:label="@string/menu_vacunas"
-        tools:layout="@layout/fragment_vacunas" />
+        tools:layout="@layout/fragment_vacunas">
+        <argument
+            android:name="mascotaId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_salud"
