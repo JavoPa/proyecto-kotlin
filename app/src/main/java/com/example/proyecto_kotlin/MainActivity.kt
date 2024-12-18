@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.onNavDestinationSelected
 import com.example.proyecto_kotlin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,25 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Realiza limpieza de la pila de fragmentos
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                // Si el elemento seleccionado es nav_home, finaliza la actividad
+                R.id.nav_home -> {
+                    navController.popBackStack(R.id.nav_home, inclusive = true)
+                    navController.navigate(R.id.nav_home)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
+                else -> {
+                    // Si el elemento seleccionado no es nav_home, realiza la navegación
+                    val handled = menuItem.onNavDestinationSelected(navController)
+                    drawerLayout.closeDrawer(navView)
+                    handled
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
