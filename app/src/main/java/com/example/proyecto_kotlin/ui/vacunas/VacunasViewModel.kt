@@ -6,14 +6,17 @@ import androidx.lifecycle.ViewModel
 
 class VacunasViewModel : ViewModel() {
 
-    // LiveData para la lista de vacunas
-    private val _listaVacunas = MutableLiveData<MutableList<Vacuna>>(mutableListOf())
-    val listaVacunas: LiveData<MutableList<Vacuna>> get() = _listaVacunas
+    private val vacunas = MutableLiveData<MutableList<Vacuna>>(mutableListOf())
+
+    // Método para obtener las vacunas de una mascota específica
+    fun obtenerVacunasPorMascota(mascotaId: String): LiveData<List<Vacuna>> {
+        return MutableLiveData(vacunas.value?.filter { it.mascotaId == mascotaId })
+    }
 
     // Método para agregar una vacuna
-    fun agregarVacuna(nuevaVacuna: Vacuna) {
-        val listaActual = _listaVacunas.value ?: mutableListOf()
-        listaActual.add(nuevaVacuna)
-        _listaVacunas.value = listaActual
+    fun agregarVacuna(vacuna: Vacuna) {
+        val listaActual = vacunas.value ?: mutableListOf()
+        listaActual.add(vacuna)
+        vacunas.value = listaActual
     }
 }

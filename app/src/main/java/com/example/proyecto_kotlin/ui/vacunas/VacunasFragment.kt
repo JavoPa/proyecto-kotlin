@@ -19,6 +19,15 @@ class VacunasFragment : Fragment() {
 
     private lateinit var vacunasViewModel: VacunasViewModel
     private lateinit var adapter: VacunasAdapter
+    private var mascotaId: String? = null // ID de la mascota seleccionada
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Obtener el ID de la mascota desde los argumentos
+        arguments?.let {
+            mascotaId = it.getString("MASCOTA_ID")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,19 +35,19 @@ class VacunasFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_vacunas, container, false)
 
-        // Configurar ViewModel
-        vacunasViewModel = ViewModelProvider(this).get(VacunasViewModel::class.java)
+        vacunasViewModel = ViewModelProvider(this)[VacunasViewModel::class.java]
 
         // Configurar RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewVacunas)
-        adapter = VacunasAdapter(mutableListOf())
+        adapter = VacunasAdapter(emptyList())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        // Observar cambios en la lista de vacunas
-        vacunasViewModel.listaVacunas.observe(viewLifecycleOwner) { lista ->
-            adapter = VacunasAdapter(lista)
-            recyclerView.adapter = adapter
+        // Observar las vacunas asociadas a la mascota
+        mascotaId?.let { id ->
+            vacunasViewModel.obtenerVacunasPorMascota(id).observe(viewLifecycleOwner) { vacunas ->
+                adapter.updateData(vacunas)
+            }
         }
 
         // FAB para agregar nueva vacuna
@@ -70,10 +79,12 @@ class VacunasFragment : Fragment() {
             val proximaDosis = etProximaDosis.text.toString()
 
             if (tipo.isNotEmpty() && fechaAplicacion.isNotEmpty() && proximaDosis.isNotEmpty()) {
-                val nuevaVacuna = Vacuna(tipo, fechaAplicacion, proximaDosis)
-                vacunasViewModel.agregarVacuna(nuevaVacuna)
-                dialog.dismiss()
-                Toast.makeText(requireContext(), "Vacuna agregada correctamente", Toast.LENGTH_SHORT).show()
+                mascotaId?.let { id ->
+                    val nuevaVacuna = Vacuna(id, tipo, fechaAplicacion, proximaDosis)
+                    vacunasViewModel.agregarVacuna(nuevaVacuna)
+                    dialog.dismiss()
+                    Toast.makeText(requireContext(), "Vacuna agregada correctamente", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(requireContext(), "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
             }
@@ -82,4 +93,3 @@ class VacunasFragment : Fragment() {
         dialog.show()
     }
 }
-

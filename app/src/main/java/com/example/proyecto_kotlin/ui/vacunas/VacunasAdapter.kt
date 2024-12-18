@@ -9,13 +9,14 @@ import com.example.proyecto_kotlin.R
 
 // Modelo de datos para la vacuna
 data class Vacuna(
+    val mascotaId: String, // Relación con la mascota
     val tipo: String,
     val fechaAplicacion: String,
     val proximaDosis: String
 )
 
 // Adapter para manejar la lista de vacunas
-class VacunasAdapter(private val listaVacunas: List<Vacuna>) :
+class VacunasAdapter(private var listaVacunas: List<Vacuna>) :
     RecyclerView.Adapter<VacunasAdapter.VacunaViewHolder>() {
 
     // ViewHolder que representa cada item en la lista
@@ -39,4 +40,10 @@ class VacunasAdapter(private val listaVacunas: List<Vacuna>) :
     }
 
     override fun getItemCount(): Int = listaVacunas.size
+
+    // Nuevo método para actualizar la lista de vacunas
+    fun updateData(nuevaLista: List<Vacuna>) {
+        listaVacunas = nuevaLista // Actualiza la lista de datos
+        notifyDataSetChanged()    // Notifica al adaptador que los datos han cambiado
+    }
 }
