@@ -50,6 +50,15 @@ class VacunasFragment : Fragment() {
             }
         }
 
+        // Botón para agregar nueva vacuna
+        val btnAgregarVacuna = binding.buttonAgregarVacuna
+        btnAgregarVacuna.setOnClickListener {
+            val dialog = AgregarVacunaDialog { nuevaVacuna ->
+                viewModel.agregarVacuna(nuevaVacuna)
+            }
+            dialog.show(parentFragmentManager, "AgregarVacunaDialog")
+        }
+
         return root
     }
 

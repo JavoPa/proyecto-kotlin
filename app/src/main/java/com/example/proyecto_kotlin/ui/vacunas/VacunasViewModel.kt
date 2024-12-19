@@ -3,12 +3,11 @@ package com.example.proyecto_kotlin.ui.vacunas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.proyecto_kotlin.ui.vacunas.Vacuna
 
 class VacunasViewModel : ViewModel() {
 
-    private val _vacunas = MutableLiveData<List<Vacuna>>()
-    val vacunas: LiveData<List<Vacuna>> get() = _vacunas
+    private val _vacunas = MutableLiveData<MutableList<Vacuna>>(mutableListOf())
+    val vacunas: LiveData<MutableList<Vacuna>> get() = _vacunas
 
     init {
         cargarVacunas()
@@ -19,6 +18,10 @@ class VacunasViewModel : ViewModel() {
             Vacuna(1, "Vacuna Antirrábica", "2023-01-10", "2024-01-10"),
             Vacuna(2, "Vacuna Triple Felina", "2023-02-15", "2024-02-15"),
             Vacuna(3, "Vacuna Leptospira", "2023-03-20", "2024-03-20")
-        )
+        ).toMutableList()
+    }
+    fun agregarVacuna(vacuna: Vacuna) {
+        _vacunas.value?.add(vacuna)
+        _vacunas.value = _vacunas.value
     }
 }
