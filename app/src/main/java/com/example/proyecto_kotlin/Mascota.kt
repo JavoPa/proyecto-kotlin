@@ -9,9 +9,9 @@ data class Mascota(
     val nombre: String,
     val especie: String,
     val raza: String,
-    val peso: Double?,
-    val alergias: List<String>,
-    val antecedentes: List<String>,
+    var peso: Double?,
+    val alergias: MutableList<String> = mutableListOf(),
+    val antecedentes: MutableList<String> = mutableListOf(),
     val fechaNacimiento: String,
     val fotoUrl: String?,
     val consultas: List<Consulta>

@@ -28,9 +28,9 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "01/01/2020",
                 peso = 30.5,
                 fotoUrl = null,
-                alergias = listOf("Polen", "Ciertos alimentos con gluten"),
-                antecedentes = listOf("Dermatitis alérgica tratada en 2022"),
-                consultas = listOf(
+                alergias = mutableListOf("Polen", "Ciertos alimentos con gluten"),
+                antecedentes = mutableListOf("Dermatitis alérgica tratada en 2022"),
+                consultas = mutableListOf(
                     Consulta(1, "Control", "Sano", null, Calendar.getInstance().time, "Veterinario Concepción"),
                     Consulta(2, "Castración", "Castrado", null, Calendar.getInstance().time, "Veterinario Concepción"),
                     Consulta(3, "Desparasitación", "Desparasitado", null, Calendar.getInstance().time, "Veterinario Concepción")
@@ -44,9 +44,9 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "15/06/2019",
                 peso = 4.8,
                 fotoUrl = null,
-                alergias = emptyList(),
-                antecedentes = listOf("Cirugía de esterilización en 2020"),
-                consultas = emptyList()
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf("Cirugía de esterilización en 2020"),
+                consultas = mutableListOf()
             ),
             Mascota(
                 id = 3,
@@ -56,9 +56,9 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "10/11/2021",
                 peso = 11.2,
                 fotoUrl = null,
-                alergias = listOf("Pollo", "Maíz"),
-                antecedentes = emptyList(),
-                consultas = emptyList()
+                alergias = mutableListOf("Pollo", "Maíz"),
+                antecedentes = mutableListOf(),
+                consultas = mutableListOf()
             ),
             Mascota(
                 id = 4,
@@ -68,9 +68,9 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "23/03/2022",
                 peso = 0.3,
                 fotoUrl = null,
-                alergias = emptyList(),
-                antecedentes = listOf("Fractura de ala derecha en 2023"),
-                consultas = emptyList()
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf("Fractura de ala derecha en 2023"),
+                consultas = mutableListOf()
             )
         )
         _mascotas.value = mascotas.toMutableList()

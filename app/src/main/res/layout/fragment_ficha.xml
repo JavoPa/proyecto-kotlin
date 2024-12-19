@@ -24,7 +24,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFCDD2"
+                    android:background="#A5D6A7"
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
@@ -40,7 +40,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFEBEE"
+                    android:background="#C8E6C9"
                     android:padding="16dp"
                     android:orientation="vertical">
 
@@ -137,8 +137,8 @@
                         android:layout_height="wrap_content"
                         android:text="Volver"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#FF5722"
-                        android:layout_gravity="start"
+                        android:backgroundTint="#388E3C"
+                        android:layout_gravity="center"
                         android:layout_margin="16dp" />
 
                     <Button
@@ -147,8 +147,8 @@
                         android:layout_height="wrap_content"
                         android:text="Salud"
                         android:textColor="#FFFFFF"
-                        android:backgroundTint="#FF5722"
-                        android:layout_gravity="start"
+                        android:backgroundTint="#388E3C"
+                        android:layout_gravity="center"
                         android:layout_margin="16dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -169,7 +169,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFCDD2"
+                    android:background="#1E88E5"
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
@@ -185,26 +185,41 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFEBEE"
+                    android:background="#E3F2FD"
                     android:padding="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Peso: "
-                        android:textSize="18sp"
-                        android:textColor="#212121"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
 
-                    <TextView
-                        android:id="@+id/textViewPeso"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#212121"
-                        android:layout_marginBottom="16dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Peso:"
+                            android:textSize="18sp"
+                            android:textColor="#212121"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#212121"
+                            android:layout_marginStart="8dp" />
+
+                        <Button
+                            android:id="@+id/btnCambiarPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cambiar"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#64B5F6"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -213,7 +228,7 @@
                         android:textSize="18sp"
                         android:textColor="#212121"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="5dp"/>
 
                     <LinearLayout
                         android:id="@+id/linearLayoutAlergias"
@@ -222,6 +237,17 @@
                         android:orientation="vertical"
                         android:paddingLeft="16dp">
                     </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/btnAgregarAlergia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:text="+"
+                        android:backgroundTint="#64B5F6"
+                        android:textColor="#FFFFFF" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -239,6 +265,16 @@
                         android:orientation="vertical"
                         android:paddingLeft="16dp">
                     </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnAgregarAntecedente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#64B5F6"
+                        android:textColor="#FFFFFF" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
