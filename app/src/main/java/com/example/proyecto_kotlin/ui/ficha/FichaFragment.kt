@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_kotlin.databinding.FragmentFichaBinding
 import com.example.proyecto_kotlin.ui.ficha.FichaFragmentArgs
 import com.example.proyecto_kotlin.ui.home.HomeViewModel
@@ -33,6 +34,7 @@ class FichaFragment : Fragment() {
 
         homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
 
+        FichaFragmentArgs
         val args = FichaFragmentArgs.fromBundle(requireArguments())
         val mascotaId = args.mascotaId
 
@@ -88,6 +90,11 @@ class FichaFragment : Fragment() {
 
         binding.btnVolver.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnSalud.setOnClickListener {
+            val action = FichaFragmentDirections.actionNavFichaToNavSalud(mascotaId)
+            findNavController().navigate(action)
         }
 
         return root

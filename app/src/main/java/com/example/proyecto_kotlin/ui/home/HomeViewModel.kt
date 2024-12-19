@@ -5,6 +5,7 @@ import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.proyecto_kotlin.Consulta
 import com.example.proyecto_kotlin.Mascota
 import java.util.Locale
 
@@ -28,7 +29,12 @@ class HomeViewModel : ViewModel() {
                 peso = 30.5,
                 fotoUrl = null,
                 alergias = listOf("Polen", "Ciertos alimentos con gluten"),
-                antecedentes = listOf("Dermatitis alérgica tratada en 2022")
+                antecedentes = listOf("Dermatitis alérgica tratada en 2022"),
+                consultas = listOf(
+                    Consulta(1, "Control", "Sano", null, Calendar.getInstance().time, "Veterinario Concepción"),
+                    Consulta(2, "Castración", "Castrado", null, Calendar.getInstance().time, "Veterinario Concepción"),
+                    Consulta(3, "Desparasitación", "Desparasitado", null, Calendar.getInstance().time, "Veterinario Concepción")
+                )
             ),
             Mascota(
                 id = 2,
@@ -39,7 +45,8 @@ class HomeViewModel : ViewModel() {
                 peso = 4.8,
                 fotoUrl = null,
                 alergias = emptyList(),
-                antecedentes = listOf("Cirugía de esterilización en 2020")
+                antecedentes = listOf("Cirugía de esterilización en 2020"),
+                consultas = emptyList()
             ),
             Mascota(
                 id = 3,
@@ -50,7 +57,8 @@ class HomeViewModel : ViewModel() {
                 peso = 11.2,
                 fotoUrl = null,
                 alergias = listOf("Pollo", "Maíz"),
-                antecedentes = emptyList()
+                antecedentes = emptyList(),
+                consultas = emptyList()
             ),
             Mascota(
                 id = 4,
@@ -61,7 +69,8 @@ class HomeViewModel : ViewModel() {
                 peso = 0.3,
                 fotoUrl = null,
                 alergias = emptyList(),
-                antecedentes = listOf("Fractura de ala derecha en 2023")
+                antecedentes = listOf("Fractura de ala derecha en 2023"),
+                consultas = emptyList()
             )
         )
         _mascotas.value = mascotas.toMutableList()

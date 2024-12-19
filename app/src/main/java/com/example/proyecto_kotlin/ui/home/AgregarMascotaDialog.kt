@@ -72,7 +72,8 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
                 peso = null,
                 alergias = emptyList(),
                 antecedentes = emptyList(),
-                fotoUrl = null
+                fotoUrl = null,
+                consultas = emptyList()
             )
 
             onMascotaAgregada(nuevaMascota)
