@@ -57,17 +57,21 @@
             android:id="@+id/buttonEditarVacuna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Editar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textVacunaProximaDosis"
+            tools:layout_editor_absoluteX="153dp" />
 
         <Button
             android:id="@+id/buttonEliminarVacuna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Eliminar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonEditarVacuna"
+            app:layout_constraintTop_toBottomOf="@+id/textVacunaProximaDosis" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

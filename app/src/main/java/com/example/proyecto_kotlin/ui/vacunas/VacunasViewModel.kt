@@ -39,9 +39,9 @@ class VacunasViewModel : ViewModel() {
     // Cargar vacunas iniciales
     private fun cargarVacunas() {
         _vacunas.value = listOf(
-            Vacuna(1, "Vacuna Antirrábica", "2023-01-10", "2024-01-10"),
-            Vacuna(2, "Vacuna Triple Felina", "2023-02-15", "2024-02-15"),
-            Vacuna(3, "Vacuna Leptospira", "2023-03-20", "2024-03-20")
+            Vacuna(1, "Vacuna Antirrábica", "2023-01-10", "2024-01-10", 1),
+            Vacuna(2, "Vacuna Triple Felina", "2023-02-15", "2024-02-15", 2),
+            Vacuna(3, "Vacuna Leptospira", "2023-03-20", "2024-03-20",3)
         ).toMutableList()
     }
 }

@@ -129,7 +129,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="2dp"
                     android:orientation="horizontal">
                     <Button
                         android:id="@+id/btnVolver"
@@ -150,6 +150,17 @@
                         android:backgroundTint="#388E3C"
                         android:layout_gravity="center"
                         android:layout_margin="16dp" />
+
+                    <Button
+                        android:id="@+id/btnVacunas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="#388E3C"
+                        android:text="Vacunas"
+                        android:textColor="#FFFFFF" />
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

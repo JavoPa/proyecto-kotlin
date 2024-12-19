@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.proyecto_kotlin.R
 
-class AgregarVacunaDialog(private val onVacunaAgregada: (Vacuna) -> Unit) : DialogFragment() {
+class AgregarVacunaDialog(
+    private val mascotaId: Int,
+    private val onVacunaAgregada: (Vacuna) -> Unit
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext())
@@ -35,7 +38,8 @@ class AgregarVacunaDialog(private val onVacunaAgregada: (Vacuna) -> Unit) : Dial
                 id = System.currentTimeMillis().toInt(),
                 nombre = nombre,
                 fechaAplicacion = fechaAplicacion,
-                proximaDosis = proximaDosis
+                proximaDosis = proximaDosis,
+                mascotaId = mascotaId
             )
 
             onVacunaAgregada(nuevaVacuna)
