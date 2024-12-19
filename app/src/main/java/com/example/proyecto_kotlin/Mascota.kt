@@ -13,7 +13,8 @@ data class Mascota(
     val alergias: MutableList<String> = mutableListOf(),
     val antecedentes: MutableList<String> = mutableListOf(),
     val fechaNacimiento: String,
-    val fotoUrl: String?
+    val fotoUrl: String?,
+    val consultas: List<Consulta>
 ) {
     val edad: Int?
         get() = calcularEdad(fechaNacimiento)

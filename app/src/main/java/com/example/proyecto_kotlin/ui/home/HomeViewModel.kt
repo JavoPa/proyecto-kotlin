@@ -5,6 +5,7 @@ import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.proyecto_kotlin.Consulta
 import com.example.proyecto_kotlin.Mascota
 import java.util.Locale
 
@@ -28,7 +29,12 @@ class HomeViewModel : ViewModel() {
                 peso = 30.5,
                 fotoUrl = null,
                 alergias = mutableListOf("Polen", "Ciertos alimentos con gluten"),
-                antecedentes = mutableListOf("Dermatitis alérgica tratada en 2022")
+                antecedentes = mutableListOf("Dermatitis alérgica tratada en 2022"),
+                consultas = mutableListOf(
+                    Consulta(1, "Control", "Sano", null, Calendar.getInstance().time, "Veterinario Concepción"),
+                    Consulta(2, "Castración", "Castrado", null, Calendar.getInstance().time, "Veterinario Concepción"),
+                    Consulta(3, "Desparasitación", "Desparasitado", null, Calendar.getInstance().time, "Veterinario Concepción")
+                )
             ),
             Mascota(
                 id = 2,
@@ -39,7 +45,8 @@ class HomeViewModel : ViewModel() {
                 peso = 4.8,
                 fotoUrl = null,
                 alergias = mutableListOf(),
-                antecedentes = mutableListOf("Cirugía de esterilización en 2020")
+                antecedentes = mutableListOf("Cirugía de esterilización en 2020"),
+                consultas = mutableListOf()
             ),
             Mascota(
                 id = 3,
@@ -50,7 +57,8 @@ class HomeViewModel : ViewModel() {
                 peso = 11.2,
                 fotoUrl = null,
                 alergias = mutableListOf("Pollo", "Maíz"),
-                antecedentes = mutableListOf()
+                antecedentes = mutableListOf(),
+                consultas = mutableListOf()
             ),
             Mascota(
                 id = 4,
@@ -61,7 +69,8 @@ class HomeViewModel : ViewModel() {
                 peso = 0.3,
                 fotoUrl = null,
                 alergias = mutableListOf(),
-                antecedentes = mutableListOf("Fractura de ala derecha en 2023")
+                antecedentes = mutableListOf("Fractura de ala derecha en 2023"),
+                consultas = mutableListOf()
             )
         )
         _mascotas.value = mascotas.toMutableList()
