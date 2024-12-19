@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_kotlin.databinding.FragmentVacunasBinding
 
 class VacunasFragment : Fragment() {
 
     private var _binding: FragmentVacunasBinding? = null
     private val binding get() = _binding!!
-    private lateinit var vacunasViewModel: VacunasViewModel
+    private lateinit var viewModel: VacunasViewModel
+    private lateinit var adapter: VacunasAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,21 +23,31 @@ class VacunasFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVacunasBinding.inflate(inflater, container, false)
-        vacunasViewModel = ViewModelProvider(this).get(VacunasViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(VacunasViewModel::class.java)
 
         val root: View = binding.root
 
         // Recuperar el mascotaId desde SharedPreferences
         val mascotaId = obtenerMascotaSeleccionada()
 
-        val textView: TextView = binding.textVacunas
-        if (mascotaId == -1) {
-            // Mostrar mensaje si no hay mascota seleccionada
-            textView.text = "Seleccione una mascota para ver su historial de vacunas."
-        } else {
-            // Mostrar mensaje indicando la mascota seleccionada
-            textView.text = "Mostrando historial de vacunas para la mascota con ID: $mascotaId"
-            // Aquí puedes cargar los datos específicos de esta mascota
+        val textView = binding.textVacunas
+        if(mascotaId != null){
+            textView.text = "No hay vacunas registradas para esta Mascota"
+        }
+
+        adapter = VacunasAdapter(emptyList())
+        binding.recyclerViewVacunas.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewVacunas.adapter = adapter
+
+        viewModel.vacunas.observe(viewLifecycleOwner) { vacunas ->
+            if (vacunas.isEmpty()) {
+                binding.recyclerViewVacunas.visibility = View.GONE
+                binding.textVacunas.visibility = View.VISIBLE
+            } else {
+                binding.recyclerViewVacunas.visibility = View.VISIBLE
+                binding.textVacunas.visibility = View.GONE
+                adapter.actualizarDatos(vacunas)
+            }
         }
 
         return root
