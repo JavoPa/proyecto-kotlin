@@ -8,13 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.ui.vacunas.Vacuna
 
-class VacunasAdapter(private var vacunas: List<Vacuna>) :
-    RecyclerView.Adapter<VacunasAdapter.VacunaViewHolder>() {
+class VacunasAdapter(
+    private var vacunas: List<Vacuna>,
+    private val onEditarClick: (Vacuna) -> Unit,
+    private val onEliminarClick: (Vacuna) -> Unit
+) : RecyclerView.Adapter<VacunasAdapter.VacunaViewHolder>() {
 
     class VacunaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textNombre: TextView = view.findViewById(R.id.textVacunaNombre)
         val textFechaAplicacion: TextView = view.findViewById(R.id.textVacunaFechaAplicacion)
         val textProximaDosis: TextView = view.findViewById(R.id.textVacunaProximaDosis)
+        val buttonEditar: View = view.findViewById(R.id.buttonEditarVacuna)
+        val buttonEliminar: View = view.findViewById(R.id.buttonEliminarVacuna)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacunaViewHolder {
@@ -28,6 +33,8 @@ class VacunasAdapter(private var vacunas: List<Vacuna>) :
         holder.textNombre.text = vacuna.nombre
         holder.textFechaAplicacion.text = "Fecha de aplicación: ${vacuna.fechaAplicacion}"
         holder.textProximaDosis.text = "Próxima dosis: ${vacuna.proximaDosis ?: "No aplica"}"
+        holder.buttonEditar.setOnClickListener { onEditarClick(vacuna) }
+        holder.buttonEliminar.setOnClickListener { onEliminarClick(vacuna) }
     }
 
     override fun getItemCount(): Int = vacunas.size
@@ -37,3 +44,4 @@ class VacunasAdapter(private var vacunas: List<Vacuna>) :
         notifyDataSetChanged()
     }
 }
+

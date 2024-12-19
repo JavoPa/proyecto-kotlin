@@ -14,6 +14,24 @@ class VacunasViewModel : ViewModel() {
         cargarVacunas()
     }
 
+    fun agregarVacuna(vacuna: Vacuna) {
+        val listaActualizada = _vacunas.value.orEmpty().toMutableList()
+        listaActualizada.add(vacuna)
+        _vacunas.value = listaActualizada
+    }
+
+    fun editarVacuna(vacunaEditada: Vacuna) {
+        val listaActualizada = _vacunas.value.orEmpty().map {
+            if (it.id == vacunaEditada.id) vacunaEditada else it
+        }
+        _vacunas.value = listaActualizada
+    }
+
+    fun eliminarVacuna(vacuna: Vacuna) {
+        val listaActualizada = _vacunas.value.orEmpty().filter { it.id != vacuna.id }
+        _vacunas.value = listaActualizada
+    }
+
     private fun cargarVacunas() { // TODO : cambiar a datos reales de la base de datos
         _vacunas.value = listOf(
             Vacuna(1, "Vacuna Antirrábica", "2023-01-10", "2024-01-10"),
