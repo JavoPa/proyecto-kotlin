@@ -3,6 +3,7 @@ package com.example.proyecto_kotlin.ui.ficha
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.proyecto_kotlin.Mascota
@@ -65,6 +67,9 @@ class FichaFragment : Fragment() {
             mostrarDialogoAgregarAntecedente()
         }
 
+        binding.btnCambiarPeso.setOnClickListener {
+            mostrarDialogoCambiarPeso()
+        }
         binding.btnVolver.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
@@ -209,6 +214,44 @@ class FichaFragment : Fragment() {
         }
         builder.setNegativeButton("Cancelar", null)
         builder.show()
+    }
+
+    private fun mostrarDialogoCambiarPeso() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_agregar_elemento, null)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        val tvHeaderDialog = dialogView.findViewById<TextView>(R.id.tvHeaderDialog)
+        val etInputDialog = dialogView.findViewById<EditText>(R.id.etInputDialog)
+        val btnConfirmDialog = dialogView.findViewById<Button>(R.id.btnConfirmDialog)
+        val btnCancelDialog = dialogView.findViewById<Button>(R.id.btnCancelDialog)
+
+        tvHeaderDialog.text = "Cambiar Peso"
+        etInputDialog.hint = "Ingresa el nuevo peso (kg)"
+        etInputDialog.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+
+        btnConfirmDialog.setOnClickListener {
+            val nuevoPesoStr = etInputDialog.text.toString().trim()
+            if (nuevoPesoStr.isNotEmpty()) {
+                val nuevoPeso = nuevoPesoStr.toDoubleOrNull()
+                if (nuevoPeso != null && nuevoPeso > 0) {
+                    mascota?.let {
+                        it.peso = nuevoPeso
+                        binding.textViewPeso.text = "${it.peso} kg"
+                    }
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(requireContext(), "Por favor, ingresa un peso válido.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "El campo no puede estar vacío.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        btnCancelDialog.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     override fun onDestroyView() {

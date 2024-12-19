@@ -173,22 +173,37 @@
                     android:padding="16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Peso: "
-                        android:textSize="18sp"
-                        android:textColor="#212121"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
 
-                    <TextView
-                        android:id="@+id/textViewPeso"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#212121"
-                        android:layout_marginBottom="16dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Peso:"
+                            android:textSize="18sp"
+                            android:textColor="#212121"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#212121"
+                            android:layout_marginStart="8dp" />
+
+                        <Button
+                            android:id="@+id/btnCambiarPeso"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cambiar"
+                            android:layout_marginStart="16dp"
+                            android:backgroundTint="#64B5F6"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
