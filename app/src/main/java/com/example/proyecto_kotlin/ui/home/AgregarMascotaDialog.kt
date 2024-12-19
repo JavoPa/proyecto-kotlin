@@ -70,8 +70,8 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
                 raza = raza,
                 fechaNacimiento = fechaNacimiento,
                 peso = null,
-                alergias = emptyList(),
-                antecedentes = emptyList(),
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf(),
                 fotoUrl = null
             )
 
