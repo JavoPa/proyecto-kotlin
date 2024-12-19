@@ -27,8 +27,8 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "01/01/2020",
                 peso = 30.5,
                 fotoUrl = null,
-                alergias = listOf("Polen", "Ciertos alimentos con gluten"),
-                antecedentes = listOf("Dermatitis alérgica tratada en 2022")
+                alergias = mutableListOf("Polen", "Ciertos alimentos con gluten"),
+                antecedentes = mutableListOf("Dermatitis alérgica tratada en 2022")
             ),
             Mascota(
                 id = 2,
@@ -38,8 +38,8 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "15/06/2019",
                 peso = 4.8,
                 fotoUrl = null,
-                alergias = emptyList(),
-                antecedentes = listOf("Cirugía de esterilización en 2020")
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf("Cirugía de esterilización en 2020")
             ),
             Mascota(
                 id = 3,
@@ -49,8 +49,8 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "10/11/2021",
                 peso = 11.2,
                 fotoUrl = null,
-                alergias = listOf("Pollo", "Maíz"),
-                antecedentes = emptyList()
+                alergias = mutableListOf("Pollo", "Maíz"),
+                antecedentes = mutableListOf()
             ),
             Mascota(
                 id = 4,
@@ -60,8 +60,8 @@ class HomeViewModel : ViewModel() {
                 fechaNacimiento = "23/03/2022",
                 peso = 0.3,
                 fotoUrl = null,
-                alergias = emptyList(),
-                antecedentes = listOf("Fractura de ala derecha en 2023")
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf("Fractura de ala derecha en 2023")
             )
         )
         _mascotas.value = mascotas.toMutableList()
