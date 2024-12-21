@@ -1,4 +1,4 @@
-package com.example.proyecto_kotlin
+package com.example.proyecto_kotlin.ui.salud
 
 import java.util.Date
 
@@ -8,7 +8,8 @@ data class Consulta(
     val diagnostico: String,
     val indicaciones: String?,
     val fecha: Date,
-    val veterinario: String
+    val veterinario: String,
+    var mascotaId: Int
 ) {
     private fun obtenerDiagnostico() = diagnostico
 }
