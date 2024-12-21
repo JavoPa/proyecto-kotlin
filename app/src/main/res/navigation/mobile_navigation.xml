@@ -81,5 +81,19 @@
             android:name="mascotaId"
             app:argType="integer"
             android:defaultValue="-1"/>
+        <action
+            android:id="@+id/action_nav_salud_to_nav_grafico"
+            app:destination="@id/nav_grafico" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_grafico"
+        android:name="com.example.proyecto_kotlin.ui.salud.grafico.GraficoFragment"
+        android:label="Gráfico de Consultas"
+        tools:layout="@layout/fragment_grafico">
+        <argument
+            android:name="mascotaId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
     </fragment>
 </navigation>
