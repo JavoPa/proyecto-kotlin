@@ -2,6 +2,7 @@ package com.example.proyecto_kotlin
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import com.example.proyecto_kotlin.ui.salud.Consulta
 import java.util.Locale
 
 data class Mascota(
@@ -13,8 +14,7 @@ data class Mascota(
     val alergias: MutableList<String> = mutableListOf(),
     val antecedentes: MutableList<String> = mutableListOf(),
     val fechaNacimiento: String,
-    val fotoUrl: String?,
-    val consultas: List<Consulta>
+    val fotoUrl: String?
 ) {
     val edad: Int?
         get() = calcularEdad(fechaNacimiento)

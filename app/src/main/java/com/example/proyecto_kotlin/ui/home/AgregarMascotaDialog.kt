@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.proyecto_kotlin.Consulta
+import com.example.proyecto_kotlin.ui.salud.Consulta
 import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 
@@ -73,8 +73,7 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
                 peso = null,
                 alergias = mutableListOf<String>(),
                 antecedentes = mutableListOf<String>(),
-                fotoUrl = null,
-                consultas = emptyList<Consulta>()
+                fotoUrl = null
             )
 
 

@@ -51,6 +51,14 @@
                 app:argType="integer"
                 android:defaultValue="-1" />
         </action>
+        <action
+            android:id="@+id/action_nav_ficha_to_nav_vacunas"
+            app:destination="@id/nav_vacunas" >
+            <argument
+                android:name="mascotaId"
+                app:argType="integer"
+                android:defaultValue="-1" />
+        </action>
     </fragment>
 
     <fragment
@@ -69,6 +77,20 @@
         android:name="com.example.proyecto_kotlin.ui.salud.SaludFragment"
         android:label="@string/menu_salud"
         tools:layout="@layout/fragment_salud">
+        <argument
+            android:name="mascotaId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <action
+            android:id="@+id/action_nav_salud_to_nav_grafico"
+            app:destination="@id/nav_grafico" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_grafico"
+        android:name="com.example.proyecto_kotlin.ui.salud.grafico.GraficoFragment"
+        android:label="Gráfico de Consultas"
+        tools:layout="@layout/fragment_grafico">
         <argument
             android:name="mascotaId"
             app:argType="integer"

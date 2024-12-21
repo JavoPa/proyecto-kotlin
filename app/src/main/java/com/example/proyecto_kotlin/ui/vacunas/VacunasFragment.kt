@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentVacunasBinding
+import com.example.proyecto_kotlin.ui.home.HomeViewModel
 
 class VacunasFragment : Fragment() {
 
@@ -22,6 +24,7 @@ class VacunasFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: VacunasViewModel
     private lateinit var adapter: VacunasAdapter
+    private var mascota: Mascota? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +35,25 @@ class VacunasFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(VacunasViewModel::class.java)
 
         val root: View = binding.root
-        val mascotaId = obtenerMascotaSeleccionada()
 
+        // Obtener el argumento `mascotaId` desde los args
+        val args = VacunasFragmentArgs.fromBundle(requireArguments())
+        val mascotaId = args.mascotaId
+
+        // Buscar la mascota seleccionada
+        val homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        mascota = homeViewModel.mascotas.value?.find { it.id == mascotaId }
+
+        if (mascota == null) {
+            binding.textVacunas.text = "Ninguna mascota seleccionada"
+            binding.recyclerViewVacunas.visibility = View.GONE
+        } else {
+            binding.textVacunas.text = ""
+            binding.textVacunasTitulo.text = "Vacunas y Antiparasitarios de ${mascota?.nombre}"
+            binding.recyclerViewVacunas.visibility = View.VISIBLE
+        }
+
+        // Configurar el adaptador
         adapter = VacunasAdapter(
             emptyList(),
             onEditarClick = { vacuna -> editarVacuna(vacuna) },
@@ -42,24 +62,27 @@ class VacunasFragment : Fragment() {
         binding.recyclerViewVacunas.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewVacunas.adapter = adapter
 
+        // Observar las vacunas del ViewModel
         viewModel.vacunas.observe(viewLifecycleOwner) { vacunas ->
-            if (vacunas.isEmpty()) {
+            val vacunasFiltradas = vacunas.filter { it.mascotaId == mascotaId }
+            if (vacunasFiltradas.isEmpty()) {
                 binding.recyclerViewVacunas.visibility = View.GONE
                 binding.textVacunas.visibility = View.VISIBLE
             } else {
                 binding.recyclerViewVacunas.visibility = View.VISIBLE
                 binding.textVacunas.visibility = View.GONE
-                adapter.actualizarDatos(vacunas)
+                adapter.actualizarDatos(vacunasFiltradas)
             }
         }
 
-
         // Botón para agregar nueva vacuna
-        val btnAgregarVacuna = binding.buttonAgregarVacuna
-        btnAgregarVacuna.setOnClickListener {
-            val dialog = AgregarVacunaDialog { nuevaVacuna ->
-                viewModel.agregarVacuna(nuevaVacuna)
-            }
+        binding.buttonAgregarVacuna.setOnClickListener {
+            val dialog = AgregarVacunaDialog(
+                mascotaId = mascotaId,
+                onVacunaAgregada = { vacuna ->
+                    viewModel.agregarVacuna(vacuna)
+                }
+            )
             dialog.show(parentFragmentManager, "AgregarVacunaDialog")
         }
 
@@ -89,11 +112,13 @@ class VacunasFragment : Fragment() {
             val vacunaNombre = etInput.text.toString()
 
             if (vacunaNombre.isNotEmpty()) {
+                val mascotaId = obtenerMascotaSeleccionada()
                 val nuevaVacuna = Vacuna(
                     id = (viewModel.vacunas.value?.size ?: 0) + 1,
                     nombre = vacunaNombre,
                     fechaAplicacion = "2023-01-01", // Valores predeterminados o dinámicos según necesites
-                    proximaDosis = "2024-01-01"
+                    proximaDosis = "2024-01-01",
+                    mascotaId = mascotaId // Asigna el ID de la mascota seleccionada
                 )
                 viewModel.agregarVacuna(nuevaVacuna)
                 dialog.dismiss()

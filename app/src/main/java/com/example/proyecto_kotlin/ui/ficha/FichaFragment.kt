@@ -80,6 +80,11 @@ class FichaFragment : Fragment() {
             //TODO: SOLUCIONAR ESTO MÁS TARDE
         }
 
+        binding.btnVacunas.setOnClickListener {
+            val action = FichaFragmentDirections.actionNavFichaToNavVacunas(mascotaId)
+            findNavController().navigate(action)
+        }
+
         return root
     }
 

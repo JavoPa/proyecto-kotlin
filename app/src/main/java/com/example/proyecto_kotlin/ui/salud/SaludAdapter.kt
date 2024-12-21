@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto_kotlin.Consulta
 import com.example.proyecto_kotlin.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class SaludAdapter(private val consultas: List<Consulta>) :
+class SaludAdapter(private var consultas: List<Consulta>) :
     RecyclerView.Adapter<SaludAdapter.SaludViewHolder>() {
 
     class SaludViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,12 +26,18 @@ class SaludAdapter(private val consultas: List<Consulta>) :
     }
 
     override fun onBindViewHolder(holder: SaludViewHolder, position: Int) {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val consulta = consultas[position]
         holder.motivoTextView.text = consulta.motivo
-        holder.diagnosticoTextView.text = consulta.diagnostico
-        holder.fechaTextView.text = consulta.fecha.toString()
+        holder.diagnosticoTextView.text = "Diagnóstico: ${consulta.diagnostico}"
+        holder.fechaTextView.text = dateFormat.format(consulta.fecha)
         holder.veterinarioTextView.text = consulta.veterinario
     }
 
     override fun getItemCount(): Int = consultas.size
+
+    fun refreshData(nuevasConsultas: List<Consulta>) {
+        consultas = nuevasConsultas
+        notifyDataSetChanged()
+    }
 }
