@@ -10,4 +10,7 @@ class SharedMascotaViewModel : ViewModel() {
     fun seleccionarMascota(mascota: Mascota) {
         _mascotaSeleccionada.value = mascota
     }
+    fun actualizarMascota(mascotaActualizada: Mascota) {
+        _mascotaSeleccionada.value = mascotaActualizada
+    }
 }
