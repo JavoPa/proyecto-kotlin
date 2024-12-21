@@ -1,4 +1,4 @@
-package com.example.proyecto_kotlin
+package com.example.proyecto_kotlin.models
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar

@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.proyecto_kotlin.R
+import com.example.proyecto_kotlin.models.Vacuna
 
 class AgregarVacunaDialog(private val onVacunaAgregada: (Vacuna) -> Unit) : DialogFragment() {
 

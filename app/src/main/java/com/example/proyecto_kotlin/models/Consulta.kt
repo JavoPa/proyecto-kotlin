@@ -1,4 +1,4 @@
-package com.example.proyecto_kotlin
+package com.example.proyecto_kotlin.models
 
 import java.util.Date
 
