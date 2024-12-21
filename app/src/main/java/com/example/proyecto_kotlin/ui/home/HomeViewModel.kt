@@ -1,11 +1,13 @@
 package com.example.proyecto_kotlin.ui.home
 
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.proyecto_kotlin.models.Consulta
-import com.example.proyecto_kotlin.models.Mascota
+import com.example.proyecto_kotlin.Consulta
+import com.example.proyecto_kotlin.Mascota
+import java.util.Locale
 
 class HomeViewModel : ViewModel() {
 

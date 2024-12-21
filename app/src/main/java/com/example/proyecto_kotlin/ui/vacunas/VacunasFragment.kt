@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentVacunasBinding
-import com.example.proyecto_kotlin.models.Vacuna
 
 class VacunasFragment : Fragment() {
 

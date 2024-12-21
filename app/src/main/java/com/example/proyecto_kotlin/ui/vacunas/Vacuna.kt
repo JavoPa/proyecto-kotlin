@@ -1,4 +1,4 @@
-package com.example.proyecto_kotlin.models
+package com.example.proyecto_kotlin.ui.vacunas
 
 data class Vacuna(
     val id: Int,

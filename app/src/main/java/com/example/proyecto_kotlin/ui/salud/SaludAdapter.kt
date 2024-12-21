@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto_kotlin.models.Consulta
+import com.example.proyecto_kotlin.Consulta
 import com.example.proyecto_kotlin.R
 
 class SaludAdapter(private val consultas: List<Consulta>) :

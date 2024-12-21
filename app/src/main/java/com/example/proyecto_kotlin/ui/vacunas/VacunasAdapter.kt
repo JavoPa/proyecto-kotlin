@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_kotlin.R
-import com.example.proyecto_kotlin.models.Vacuna
+import com.example.proyecto_kotlin.ui.vacunas.Vacuna
 
 class VacunasAdapter(
     private var vacunas: List<Vacuna>,

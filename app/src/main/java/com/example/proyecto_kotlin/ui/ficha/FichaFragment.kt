@@ -15,10 +15,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.proyecto_kotlin.models.Mascota
+import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentFichaBinding
+import com.example.proyecto_kotlin.ui.ficha.FichaFragmentArgs
 import com.example.proyecto_kotlin.ui.home.HomeViewModel
+import com.example.proyecto_kotlin.ui.salud.SaludViewModel
 
 class FichaFragment : Fragment() {
 

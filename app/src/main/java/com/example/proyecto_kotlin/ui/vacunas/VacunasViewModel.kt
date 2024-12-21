@@ -3,7 +3,6 @@ package com.example.proyecto_kotlin.ui.vacunas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.proyecto_kotlin.models.Vacuna
 
 class VacunasViewModel : ViewModel() {
 
