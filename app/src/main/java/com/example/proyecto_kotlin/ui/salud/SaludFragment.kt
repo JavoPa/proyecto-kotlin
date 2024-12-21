@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.databinding.FragmentSaludBinding
+import com.example.proyecto_kotlin.ui.ficha.FichaFragmentDirections
 import com.example.proyecto_kotlin.ui.home.HomeViewModel
 
 class SaludFragment : Fragment() {
@@ -53,6 +55,11 @@ class SaludFragment : Fragment() {
                 binding.textSalud.isVisible = false
                 adapter.refreshData(consultasFiltradas)
             }
+        }
+
+        binding.buttonVerGrafico.setOnClickListener {
+            val action = SaludFragmentDirections.actionNavSaludToNavGrafico(mascotaId)
+            findNavController().navigate(action)
         }
 
         return binding.root
