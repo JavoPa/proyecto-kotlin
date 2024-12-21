@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.ficha
 
+import SharedMascotaViewModel
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -19,7 +20,6 @@ import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentFichaBinding
 import com.example.proyecto_kotlin.ui.ficha.FichaFragmentArgs
-import com.example.proyecto_kotlin.ui.home.HomeViewModel
 import com.example.proyecto_kotlin.ui.salud.SaludViewModel
 
 class FichaFragment : Fragment() {
@@ -27,8 +27,8 @@ class FichaFragment : Fragment() {
     private var _binding: FragmentFichaBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var homeViewModel: HomeViewModel
     private var mascota: Mascota? = null
+    private lateinit var sharedViewModel : SharedMascotaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,28 +38,26 @@ class FichaFragment : Fragment() {
         _binding = FragmentFichaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedMascotaViewModel::class.java]
+
+        sharedViewModel.mascotaSeleccionada.observe(viewLifecycleOwner) { mascota ->
+            if (mascota != null) {
+                binding.textViewNombre.text = mascota.nombre
+                binding.textViewRaza.text = mascota.raza
+                binding.textViewEspecie.text = mascota.especie
+                binding.textViewFechaNacimiento.text = mascota.fechaNacimiento
+                binding.textViewPeso.text = "${mascota.peso} kg"
+                binding.textViewEdad.text = "${calcularEdad(mascota.fechaNacimiento)} años"
+                actualizarAlergias(mascota.alergias)
+                actualizarAntecedentes(mascota.antecedentes)
+            } else {
+                binding.textViewNombre.text = "Ninguna mascota seleccionada"
+            }
+        }
 
         FichaFragmentArgs
         val args = FichaFragmentArgs.fromBundle(requireArguments())
-        val mascotaId = args.mascotaId
 
-        if (mascotaId == -1) {
-            binding.textViewNombre.text = "Ninguna mascota seleccionada"
-        } else {
-            mascota = homeViewModel.mascotas.value?.find { it.id == mascotaId }
-            mascota?.let {
-                binding.textViewNombre.text = it.nombre
-                binding.textViewRaza.text = it.raza
-                binding.textViewEspecie.text = it.especie
-                binding.textViewFechaNacimiento.text = it.fechaNacimiento
-                binding.textViewPeso.text = "${it.peso} kg"
-                binding.textViewEdad.text = "${calcularEdad(it.fechaNacimiento)} años"
-
-                actualizarAlergias(it.alergias)
-                actualizarAntecedentes(it.antecedentes)
-            }
-        }
 
         binding.btnAgregarAlergia.setOnClickListener {
             mostrarDialogoAgregarAlergia()
@@ -77,8 +75,7 @@ class FichaFragment : Fragment() {
         }
 
         binding.btnSalud.setOnClickListener {
-            val action = FichaFragmentDirections.actionNavFichaToNavSalud(mascotaId)
-            findNavController().navigate(action)
+            //TODO: SOLUCIONAR ESTO MÁS TARDE
         }
 
         return root
