@@ -54,10 +54,6 @@
         <action
             android:id="@+id/action_nav_ficha_to_nav_vacunas"
             app:destination="@id/nav_vacunas" >
-            <argument
-                android:name="mascotaId"
-                app:argType="integer"
-                android:defaultValue="-1" />
         </action>
     </fragment>
 
