@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.vacunas
 
+import SharedMascotaViewModel
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -25,6 +26,7 @@ class VacunasFragment : Fragment() {
     private lateinit var viewModel: VacunasViewModel
     private lateinit var adapter: VacunasAdapter
     private var mascota: Mascota? = null
+    private lateinit var sharedViewModel : SharedMascotaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,25 +35,9 @@ class VacunasFragment : Fragment() {
     ): View {
         _binding = FragmentVacunasBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(VacunasViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedMascotaViewModel::class.java]
 
         val root: View = binding.root
-
-        // Obtener el argumento `mascotaId` desde los args
-        val args = VacunasFragmentArgs.fromBundle(requireArguments())
-        val mascotaId = args.mascotaId
-
-        // Buscar la mascota seleccionada
-        val homeViewModel = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
-        mascota = homeViewModel.mascotas.value?.find { it.id == mascotaId }
-
-        if (mascota == null) {
-            binding.textVacunas.text = "Ninguna mascota seleccionada"
-            binding.recyclerViewVacunas.visibility = View.GONE
-        } else {
-            binding.textVacunas.text = ""
-            binding.textVacunasTitulo.text = "Vacunas y Antiparasitarios de ${mascota?.nombre}"
-            binding.recyclerViewVacunas.visibility = View.VISIBLE
-        }
 
         // Configurar el adaptador
         adapter = VacunasAdapter(
@@ -62,31 +48,51 @@ class VacunasFragment : Fragment() {
         binding.recyclerViewVacunas.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewVacunas.adapter = adapter
 
-        // Observar las vacunas del ViewModel
-        viewModel.vacunas.observe(viewLifecycleOwner) { vacunas ->
-            val vacunasFiltradas = vacunas.filter { it.mascotaId == mascotaId }
-            if (vacunasFiltradas.isEmpty()) {
+        sharedViewModel.mascotaSeleccionada.observe(viewLifecycleOwner){ mascota ->
+            if (mascota == null ){
+                binding.textVacunasTitulo.text = "Ninguna mascota seleccionada"
                 binding.recyclerViewVacunas.visibility = View.GONE
-                binding.textVacunas.visibility = View.VISIBLE
             } else {
-                binding.recyclerViewVacunas.visibility = View.VISIBLE
-                binding.textVacunas.visibility = View.GONE
-                adapter.actualizarDatos(vacunasFiltradas)
+                binding.textVacunasTitulo.text = "Vacunas y Antiparasitarios de ${mascota.nombre}"
+                cargarVacunas(mascota)
             }
+
         }
 
         // Botón para agregar nueva vacuna
         binding.buttonAgregarVacuna.setOnClickListener {
-            val dialog = AgregarVacunaDialog(
-                mascotaId = mascotaId,
-                onVacunaAgregada = { vacuna ->
-                    viewModel.agregarVacuna(vacuna)
-                }
-            )
-            dialog.show(parentFragmentManager, "AgregarVacunaDialog")
+            sharedViewModel.mascotaSeleccionada.value?.let { mascota ->
+                val dialog = AgregarVacunaDialog(
+                    mascotaId = mascota.id,
+                    onVacunaAgregada = { nuevaVacuna ->
+                        viewModel.agregarVacuna(nuevaVacuna)
+                    }
+                )
+                dialog.show(parentFragmentManager, "AgregarVacunaDialog")
+            } ?: Toast.makeText(
+                requireContext(),
+                "Selecciona una mascota primero",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         return root
+    }
+
+    private fun cargarVacunas(mascota: Mascota){
+        viewModel.vacunas.observe(viewLifecycleOwner){ vacunas ->
+            val vacunasFiltradas = vacunas.filter { it.mascotaId == mascota.id }
+
+            if (vacunasFiltradas.isEmpty()){
+                binding.recyclerViewVacunas.visibility = View.GONE
+                binding.textVacunas.text = "No hay vacunas registradas para ${mascota.nombre}"
+                binding.textVacunas.visibility = View.VISIBLE
+            } else {
+                binding.textVacunas.visibility = View.GONE
+                binding.recyclerViewVacunas.visibility = View.VISIBLE
+                adapter.actualizarDatos(vacunasFiltradas)
+            }
+        }
     }
 
     private fun agregarVacuna() {
