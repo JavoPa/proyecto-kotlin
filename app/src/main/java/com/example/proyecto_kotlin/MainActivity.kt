@@ -47,8 +47,26 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout.closeDrawer(navView)
                     true
                 }
+                R.id.nav_ficha -> {
+                    navController.popBackStack(R.id.nav_ficha, inclusive = true)
+                    navController.navigate(R.id.nav_ficha)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
+                R.id.nav_vacunas -> {
+                    navController.popBackStack(R.id.nav_vacunas, inclusive = true)
+                    navController.navigate(R.id.nav_vacunas)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
+                R.id.nav_salud -> {
+                    navController.popBackStack(R.id.nav_salud, inclusive = true)
+                    navController.navigate(R.id.nav_salud)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
                 else -> {
-                    // Si el elemento seleccionado no es nav_home, realiza la navegación
+                    // Si el elemento seleccionado no es ninguno de los anteriores, maneja la navegación normalmente
                     val handled = menuItem.onNavDestinationSelected(navController)
                     drawerLayout.closeDrawer(navView)
                     handled
