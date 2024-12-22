@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.salud
 
+import SharedMascotaViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ class SaludFragment : Fragment() {
     private lateinit var viewModel: SaludViewModel
     private lateinit var adapter: SaludAdapter
     private var mascota: Mascota? = null
+    private lateinit var sharedViewModel : SharedMascotaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,41 +32,47 @@ class SaludFragment : Fragment() {
     ): View {
         _binding = FragmentSaludBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[SaludViewModel::class.java]
-        val homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedMascotaViewModel::class.java]
 
-        val args = SaludFragmentArgs.fromBundle(requireArguments())
-        val mascotaId = args.mascotaId
-        mascota = homeViewModel.mascotas.value?.find { it.id == mascotaId }
-
-        mascota?.let {
-            binding.textViewTitulo.text = "Consultas Médicas de ${it.nombre}"
-        } ?: run {
-            binding.textSalud.text = "Ninguna mascota seleccionada"
-        }
 
         adapter = SaludAdapter(emptyList())
         binding.recyclerViewSalud.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewSalud.adapter = adapter
 
-        viewModel.consultas.observe(viewLifecycleOwner) { consultas ->
-            val consultasFiltradas = consultas.filter { it.mascotaId == mascotaId }
-
-            if (consultasFiltradas.isEmpty()) {
+        sharedViewModel.mascotaSeleccionada.observe(viewLifecycleOwner){ mascota ->
+            if(mascota == null){
+                binding.textViewTitulo.text = "Ninguna mascota seleccionada"
+                binding.recyclerViewSalud.isVisible = false
                 binding.textSalud.isVisible = true
+                binding.buttonVerGrafico.isVisible = false
             } else {
-                binding.textSalud.isVisible = false
-                adapter.refreshData(consultasFiltradas)
+                binding.textViewTitulo.text = "Consultas Médicas de ${mascota.nombre}"
+                cargarConsultas(mascota)
             }
         }
 
         binding.buttonVerGrafico.setOnClickListener {
-            val action = SaludFragmentDirections.actionNavSaludToNavGrafico(mascotaId)
-            findNavController().navigate(action)
+            sharedViewModel.mascotaSeleccionada.value?.let { mascota ->
+                val action = SaludFragmentDirections.actionNavSaludToNavGrafico(mascota.id)
+                findNavController().navigate(action)
+            }
         }
 
         return binding.root
     }
 
+    private fun cargarConsultas(mascota: Mascota) {
+        viewModel.consultas.observe(viewLifecycleOwner) { consultas ->
+            val consultasFiltradas = consultas.filter { it.mascotaId == mascota.id }
+            if (consultasFiltradas.isEmpty()){
+                binding.textSalud.isVisible = false
+            } else {
+                binding.textSalud.isVisible = false
+                binding.recyclerViewSalud.isVisible = true
+                adapter.refreshData(consultasFiltradas)
+            }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

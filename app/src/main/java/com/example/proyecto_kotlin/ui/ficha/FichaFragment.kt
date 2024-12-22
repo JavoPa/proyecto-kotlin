@@ -75,7 +75,7 @@ class FichaFragment : Fragment() {
 
         binding.btnSalud.setOnClickListener {
             // TODO ARREGLAR PARA QUE TENGA PERMANENCIA
-            val action = FichaFragmentDirections.actionNavFichaToNavSalud(mascota?.id ?: -1)
+            val action = FichaFragmentDirections.actionNavFichaToNavSalud()
             findNavController().navigate(action)
         }
 
