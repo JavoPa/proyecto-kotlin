@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.vacunas
 
+import SharedMascotaViewModel
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentVacunasBinding
-import SharedMascotaViewModel
 
 class VacunasFragment : Fragment() {
 
