@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +19,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.databinding.FragmentFichaBinding
-import com.example.proyecto_kotlin.ui.ficha.FichaFragmentArgs
-import com.example.proyecto_kotlin.ui.salud.SaludViewModel
 
 class FichaFragment : Fragment() {
 
@@ -83,8 +80,7 @@ class FichaFragment : Fragment() {
         }
 
         binding.btnVacunas.setOnClickListener {
-            // TODO: SOLUCIONAR ESTO MÁS TARDE
-            val action = FichaFragmentDirections.actionNavFichaToNavVacunas(mascota?.id ?: -1)
+            val action = FichaFragmentDirections.actionNavFichaToNavVacunas()
             findNavController().navigate(action)
         }
 
