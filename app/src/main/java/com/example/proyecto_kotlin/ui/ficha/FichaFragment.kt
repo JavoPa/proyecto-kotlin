@@ -77,13 +77,15 @@ class FichaFragment : Fragment() {
         }
 
         binding.btnSalud.setOnClickListener {
-            //TODO: SOLUCIONAR ESTO MÁS TARDE
+            // TODO ARREGLAR PARA QUE TENGA PERMANENCIA
+            val action = FichaFragmentDirections.actionNavFichaToNavSalud(mascota?.id ?: -1)
+            findNavController().navigate(action)
         }
 
         binding.btnVacunas.setOnClickListener {
             // TODO: SOLUCIONAR ESTO MÁS TARDE
-//            val action = FichaFragmentDirections.actionNavFichaToNavVacunas(mascotaId)
-//            findNavController().navigate(action)
+            val action = FichaFragmentDirections.actionNavFichaToNavVacunas(mascota?.id ?: -1)
+            findNavController().navigate(action)
         }
 
         return root
