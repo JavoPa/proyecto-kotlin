@@ -59,8 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Editar"
-            app:layout_constraintTop_toBottomOf="@+id/textVacunaProximaDosis"
-            tools:layout_editor_absoluteX="153dp" />
+            app:layout_constraintStart_toStartOf="@id/textVacunaProximaDosis"
+            app:layout_constraintTop_toBottomOf="@id/textVacunaProximaDosis" />
+            // app:layout_constraintTop_toBottomOf="@+id/textVacunaProximaDosis"
+            // tools:layout_editor_absoluteX="153dp" />
 
         <Button
             android:id="@+id/buttonEliminarVacuna"

@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.ui.home
 
+import SharedMascotaViewModel
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.proyecto_kotlin.R
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var adapter: MascotaAdapter
+    private lateinit var sharedViewModel: SharedMascotaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,11 +26,11 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedMascotaViewModel::class.java]
 
         // Configurar el adaptador del RecyclerView
         adapter = MascotaAdapter(emptyList()) { mascota ->
-            // Utilizar NavController para navegar a FichaFragment con el argumento mascotaId
-            guardarMascotaSeleccionada(mascota.id)
+            sharedViewModel.seleccionarMascota(mascota)
             val action = HomeFragmentDirections.actionNavHomeToNavFicha(mascota.id)
             findNavController().navigate(action)
         }
@@ -54,8 +56,8 @@ class HomeFragment : Fragment() {
         return view
     }
 
-    private fun guardarMascotaSeleccionada(mascotaId: Int) {
-        val sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putInt("MASCOTA_ID", mascotaId).apply()
-    }
+//    private fun guardarMascotaSeleccionada(mascotaId: Int) {
+//        val sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+//        sharedPreferences.edit().putInt("MASCOTA_ID", mascotaId).apply()
+//    }
 }

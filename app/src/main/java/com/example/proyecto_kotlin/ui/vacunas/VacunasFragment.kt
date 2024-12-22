@@ -179,7 +179,14 @@ class VacunasFragment : Fragment() {
 
 
     private fun eliminarVacuna(vacuna: Vacuna) {
-        viewModel.eliminarVacuna(vacuna)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Eliminar Vacuna")
+        builder.setMessage("¿Estás seguro que deseas eliminar esta vacuna?")
+        builder.setPositiveButton("Eliminar") { _, _ ->
+            viewModel.eliminarVacuna(vacuna)
+        }
+        builder.setNegativeButton("Cancelar", null)
+        builder.show()
     }
 
 
