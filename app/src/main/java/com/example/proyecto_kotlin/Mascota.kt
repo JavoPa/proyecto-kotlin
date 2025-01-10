@@ -2,11 +2,21 @@ package com.example.proyecto_kotlin
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import com.example.proyecto_kotlin.ui.salud.Consulta
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.Locale
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import androidx.room.TypeConverter
+import java.util.Date
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
+
+@Entity(tableName = "mascotas")
+@TypeConverters(Converters::class)
 data class Mascota(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val nombre: String,
     val especie: String,
     val raza: String,
@@ -41,5 +51,49 @@ data class Mascota(
             return edadCalculada
         }
         return null
+    }
+}
+
+@Dao
+interface MascotaDao {
+    @Query("SELECT * FROM mascotas")
+    fun getAll(): LiveData<List<Mascota>>
+
+    @Query("SELECT * FROM mascotas WHERE id = :id")
+    fun getById(id: Int): LiveData<Mascota?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(mascota: Mascota)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(mascotas: List<Mascota>)
+
+    @Update
+    suspend fun update(mascota: Mascota)
+
+    @Delete
+    suspend fun delete(mascota: Mascota)
+}
+
+class Converters {
+    @TypeConverter
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
+    }
+
+    @TypeConverter
+    fun dateToTimestamp(date: Date?): Long? {
+        return date?.time
+    }
+
+    @TypeConverter
+    fun fromStringList(value: String?): MutableList<String>? {
+        val listType = object : TypeToken<MutableList<String>>() {}.type
+        return value?.let { Gson().fromJson(it, listType) }
+    }
+
+    @TypeConverter
+    fun stringListToString(list: MutableList<String>?): String? {
+        return Gson().toJson(list)
     }
 }

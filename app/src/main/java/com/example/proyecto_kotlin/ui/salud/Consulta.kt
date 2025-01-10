@@ -11,5 +11,5 @@ data class Consulta(
     val veterinario: String,
     var mascotaId: Int
 ) {
-    private fun obtenerDiagnostico() = diagnostico
+    fun obtenerDiagnostico() = diagnostico
 }

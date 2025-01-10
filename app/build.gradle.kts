@@ -47,6 +47,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+    implementation("com.google.code.gson:gson:2.8.9")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

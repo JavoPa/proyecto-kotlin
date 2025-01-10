@@ -1,7 +1,6 @@
 package com.example.proyecto_kotlin.ui.home
 
 import SharedMascotaViewModel
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,9 +54,4 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
-//    private fun guardarMascotaSeleccionada(mascotaId: Int) {
-//        val sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-//        sharedPreferences.edit().putInt("MASCOTA_ID", mascotaId).apply()
-//    }
 }

@@ -11,11 +11,12 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.proyecto_kotlin.ui.salud.Consulta
 import com.example.proyecto_kotlin.Mascota
 import com.example.proyecto_kotlin.R
 
-class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : DialogFragment() {
+class AgregarMascotaDialog(
+    private val onMascotaAgregada: (Mascota) -> Unit
+) : DialogFragment() {
 
     private val especiesYrazas = mapOf(
         "Perro" to listOf("Labrador", "Pastor Alemán", "Poodle", "Bulldog"),
@@ -65,17 +66,15 @@ class AgregarMascotaDialog(private val onMascotaAgregada: (Mascota) -> Unit) : D
             }
 
             val nuevaMascota = Mascota(
-                id = System.currentTimeMillis().toInt(),
                 nombre = nombre,
                 especie = especie,
                 raza = raza,
                 fechaNacimiento = fechaNacimiento,
                 peso = null,
-                alergias = mutableListOf<String>(),
-                antecedentes = mutableListOf<String>(),
+                alergias = mutableListOf(),
+                antecedentes = mutableListOf(),
                 fotoUrl = null
             )
-
 
             onMascotaAgregada(nuevaMascota)
             dismiss()
