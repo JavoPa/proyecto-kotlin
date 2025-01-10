@@ -1,5 +1,5 @@
 package com.example.proyecto_kotlin.ui.vacunas
-import SharedMascotaViewModel
+import com.example.proyecto_kotlin.SharedMascotaViewModel
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater

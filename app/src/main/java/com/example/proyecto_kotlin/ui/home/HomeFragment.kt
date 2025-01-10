@@ -1,6 +1,6 @@
 package com.example.proyecto_kotlin.ui.home
 
-import SharedMascotaViewModel
+import com.example.proyecto_kotlin.SharedMascotaViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

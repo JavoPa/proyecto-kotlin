@@ -1,6 +1,6 @@
 package com.example.proyecto_kotlin.ui.ficha
 
-import SharedMascotaViewModel
+import com.example.proyecto_kotlin.SharedMascotaViewModel
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -26,7 +26,7 @@ class FichaFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var mascota: Mascota? = null
-    private lateinit var sharedViewModel : SharedMascotaViewModel
+    private lateinit var sharedViewModel: SharedMascotaViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +54,7 @@ class FichaFragment : Fragment() {
             }
         }
 
-        FichaFragmentArgs
         val args = FichaFragmentArgs.fromBundle(requireArguments())
-
 
         binding.btnAgregarAlergia.setOnClickListener {
             mostrarDialogoAgregarAlergia()
@@ -74,7 +72,6 @@ class FichaFragment : Fragment() {
         }
 
         binding.btnSalud.setOnClickListener {
-            // TODO ARREGLAR PARA QUE TENGA PERMANENCIA
             val action = FichaFragmentDirections.actionNavFichaToNavSalud()
             findNavController().navigate(action)
         }
