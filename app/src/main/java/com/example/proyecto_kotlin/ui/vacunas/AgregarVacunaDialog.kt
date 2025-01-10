@@ -35,7 +35,6 @@ class AgregarVacunaDialog(
             }
 
             val nuevaVacuna = Vacuna(
-                id = System.currentTimeMillis().toInt(),
                 nombre = nombre,
                 fechaAplicacion = fechaAplicacion,
                 proximaDosis = proximaDosis,

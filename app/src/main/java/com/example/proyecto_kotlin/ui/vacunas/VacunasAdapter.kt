@@ -7,6 +7,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_kotlin.R
 import com.example.proyecto_kotlin.ui.vacunas.Vacuna
+import androidx.recyclerview.widget.DiffUtil
+
+class VacunasDiffCallback(
+    private val oldList: List<Vacuna>,
+    private val newList: List<Vacuna>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+}
 
 class VacunasAdapter(
     private var vacunas: List<Vacuna>,
@@ -40,8 +59,9 @@ class VacunasAdapter(
     override fun getItemCount(): Int = vacunas.size
 
     fun actualizarDatos(nuevasVacunas: List<Vacuna>) {
+        val diffCallback = VacunasDiffCallback(vacunas, nuevasVacunas)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         vacunas = nuevasVacunas
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }
-

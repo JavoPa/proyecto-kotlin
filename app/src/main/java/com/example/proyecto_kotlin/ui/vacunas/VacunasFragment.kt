@@ -1,5 +1,4 @@
 package com.example.proyecto_kotlin.ui.vacunas
-
 import SharedMascotaViewModel
 import android.app.AlertDialog
 import android.os.Bundle
@@ -37,6 +36,15 @@ class VacunasFragment : Fragment() {
 
         val root: View = binding.root
 
+        // Configurar el adaptador
+        adapter = VacunasAdapter(
+            emptyList(),
+            onEditarClick = { vacuna -> editarVacuna(vacuna) },
+            onEliminarClick = { vacuna -> eliminarVacuna(vacuna) }
+        )
+        binding.recyclerViewVacunas.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewVacunas.adapter = adapter
+
         // Observar la mascota seleccionada en el SharedViewModel
         sharedViewModel.mascotaSeleccionada.observe(viewLifecycleOwner) { mascotaSeleccionada ->
             mascota = mascotaSeleccionada // Sincronizamos la variable local
@@ -64,15 +72,6 @@ class VacunasFragment : Fragment() {
                 }
             }
         }
-
-        // Configurar el adaptador
-        adapter = VacunasAdapter(
-            emptyList(),
-            onEditarClick = { vacuna -> editarVacuna(vacuna) },
-            onEliminarClick = { vacuna -> eliminarVacuna(vacuna) }
-        )
-        binding.recyclerViewVacunas.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewVacunas.adapter = adapter
 
         // Botón para agregar nueva vacuna
         binding.buttonAgregarVacuna.setOnClickListener {
@@ -133,7 +132,6 @@ class VacunasFragment : Fragment() {
         dialog.show()
     }
 
-
     private fun eliminarVacuna(vacuna: Vacuna) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Eliminar Vacuna")
@@ -144,7 +142,6 @@ class VacunasFragment : Fragment() {
         builder.setNegativeButton("Cancelar", null)
         builder.show()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
